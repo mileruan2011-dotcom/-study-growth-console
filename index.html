@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Growth Console</title>
+<style>
+:root{--bg:#08090d;--panel:#141720;--panel2:#1b1f2b;--line:rgba(255,255,255,.1);--text:#f5f5f7;--muted:#a8acb8;--dim:#737887;--red:#e63646;--red2:#ff6170;--gold:#f7c85f;--green:#76e0a3;--radius:20px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#251018 0,#08090d 36%,#05060a 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{border:0;cursor:pointer}.app{max-width:1180px;margin:0 auto;padding:22px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.mark{width:44px;height:44px;border:1px solid var(--line);background:linear-gradient(135deg,var(--red),#710d19);border-radius:14px;display:grid;place-items:center;font-weight:900;box-shadow:0 12px 40px rgba(230,54,70,.25)}h1,h2,h3,p{margin:0}.brand h1{font-size:26px;letter-spacing:-.04em}.brand p,.muted{color:var(--muted)}.nav{display:flex;background:rgba(255,255,255,.04);border:1px solid var(--line);padding:5px;border-radius:999px;gap:4px}.nav button{background:transparent;color:var(--muted);padding:10px 15px;border-radius:999px}.nav button.active{background:var(--red);color:white}.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);padding:10px 14px;border-radius:999px}.primary{background:linear-gradient(135deg,var(--red),#a71322);color:white;padding:14px 18px;border-radius:16px;font-weight:800;box-shadow:0 14px 32px rgba(230,54,70,.25)}.grid{display:grid;gap:16px}.homeGrid{grid-template-columns:1.2fr .8fr}.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 18px 70px rgba(0,0,0,.22);position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.75}.hero{min-height:260px;display:flex;flex-direction:column;justify-content:space-between}.hero h2{font-size:42px;letter-spacing:-.06em;line-height:1}.hero p{font-size:17px;color:var(--muted);margin-top:10px}.durations{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.chip{background:#10131b;color:var(--text);border:1px solid var(--line);padding:10px 13px;border-radius:999px}.chip.active{border-color:rgba(230,54,70,.8);box-shadow:0 0 0 3px rgba(230,54,70,.14)}.statStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.miniStat{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:16px;padding:12px}.miniStat b{display:block;font-size:13px}.miniStat span{color:var(--muted);font-size:12px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.tabsPage{display:none}.tabsPage.active{display:block}.missionSetup{grid-template-columns:.9fr 1.1fr}.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:12px}.option{background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--text);padding:12px;border-radius:15px;text-align:left}.option.active{border-color:var(--red);background:rgba(230,54,70,.14)}.timerFace{text-align:center;padding:38px}.time{font-size:72px;font-weight:900;letter-spacing:-.08em}.timerBtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}.hidden{display:none!important}.quality{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--line);padding:12px;border-radius:14px;color:var(--muted)}.scale{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.scale button{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text)}.scale button.active{background:var(--red);border-color:var(--red)}textarea,input[type=text]{width:100%;background:#0d1018;border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px;outline:0}.statsGrid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.statCard{transition:.25s transform,.25s border-color,.25s box-shadow}.statCard.flash{border-color:var(--red);box-shadow:0 0 0 3px rgba(230,54,70,.18),0 20px 70px rgba(230,54,70,.16);transform:translateY(-2px)}.bar{height:10px;background:#0a0c12;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:999px;transition:width .7s cubic-bezier(.2,.8,.2,1)}.subjectList{display:grid;gap:10px}.subjectItem{display:grid;grid-template-columns:160px 1fr 60px;gap:10px;align-items:center}.logFilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.logEntry{margin-bottom:12px}.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;background:rgba(230,54,70,.13);color:#ffc8cf;border:1px solid rgba(230,54,70,.3);font-size:12px;margin:3px}.overlay{position:fixed;inset:0;background:rgba(2,3,6,.78);backdrop-filter:blur(10px);z-index:50;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .12s}.overlay.show{opacity:1;pointer-events:auto}.result{width:min(560px,100%);background:linear-gradient(180deg,#1c202b,#10131b);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:24px;box-shadow:0 40px 140px rgba(0,0,0,.6);transform:translateY(20px) rotate(-1deg);opacity:0}.overlay.show .result{animation:cardIn .22s forwards}.stamp{font-size:44px;font-weight:1000;letter-spacing:-.06em;text-align:center;color:white;text-shadow:0 0 28px rgba(230,54,70,.55);animation:pop .22s .12s both}.rewardRows{display:grid;gap:8px;margin:18px 0}.rewardRow{display:flex;justify-content:space-between;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:12px 14px;border-radius:15px;opacity:0;transform:translateY(8px)}.rewardRow.show{opacity:1;transform:none;transition:.25s}.levelUp{display:none;text-align:center;margin-top:10px;color:var(--gold);font-weight:900;font-size:24px}.levelUp.show{display:block;animation:flash .45s both}@keyframes cardIn{to{opacity:1;transform:translateY(0) rotate(0)}}@keyframes pop{0%{transform:scale(.86)}70%{transform:scale(1.06)}100%{transform:scale(1)}}@keyframes flash{0%,100%{filter:brightness(1)}50%{filter:brightness(1.8)}}@media(max-width:800px){.homeGrid,.missionSetup{grid-template-columns:1fr}.statStrip{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}.time{font-size:54px}.hero h2{font-size:34px}.quality{grid-template-columns:1fr}.subjectItem{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="mark">GC</div><div><h1>Growth Console</h1><p>Choose one small win.</p></div></div>
+    <div class="row"><nav class="nav" id="nav"></nav><button class="ghost" id="resetBtn">Reset</button></div>
+  </header>
+
+  <main>
+    <section id="home" class="tabsPage active">
+      <div class="grid homeGrid">
+        <div class="card hero">
+          <div><h2>Choose one small win.</h2><p id="homeSubtitle">No sessions yet. Start with a 10-minute mission.</p></div>
+          <div><button class="primary" id="startMissionBtn">Start Mission</button><div class="durations" id="quickDurations"></div></div>
+        </div>
+        <div class="grid">
+          <div class="card"><div class="row"><h3>Suggested now</h3><span class="badge" id="suggestReason">Restart friendly</span></div><p class="muted" id="suggestedText" style="margin-top:10px"></p></div>
+          <div class="card"><h3>Minimum viable win</h3><p class="muted" style="margin-top:8px">10 minutes of active work counts. No guilt mechanics. Restarting is a skill.</p></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px"><div class="row"><h3>Stat strip</h3><span class="muted">Level never caps.</span></div><div class="statStrip" id="statStrip" style="margin-top:14px"></div></div>
+      <div class="card" style="margin-top:16px"><h3>Last session</h3><div id="lastSession" class="muted" style="margin-top:10px"></div></div>
+    </section>
+
+    <section id="mission" class="tabsPage">
+      <div id="missionSetup" class="grid missionSetup">
+        <div class="card"><h2>Focus Mission</h2><p class="muted" style="margin-top:6px">Pick the smallest useful target.</p><h3 style="margin-top:18px">Subject</h3><div class="options" id="subjectOptions"></div><h3 style="margin-top:18px">Mission type</h3><div class="options" id="typeOptions"></div><h3 style="margin-top:18px">Duration</h3><div class="durations" id="durationOptions"></div></div>
+        <div class="card"><h3>Estimated gains</h3><div id="estimatedGains" style="margin-top:12px"></div><button class="primary" id="beginBtn" style="margin-top:18px;width:100%">Begin Focus</button><p class="muted" style="margin-top:12px">Phone away. One target only. The website is not your boss; it is a launch ramp.</p></div>
+      </div>
+      <div id="timerScreen" class="card timerFace hidden"><p class="muted" id="runningTitle"></p><div class="time" id="timerDisplay">25:00</div><p class="muted">Phone away. One target only.</p><div class="timerBtns"><button class="ghost" id="pauseBtn">Pause</button><button class="primary" id="finishBtn">Finish Early</button><button class="ghost" id="cancelBtn">Cancel</button></div></div>
+    </section>
+
+    <section id="stats" class="tabsPage">
+      <div class="card"><h2>Growth Stats</h2><div id="overview" class="muted" style="margin-top:10px"></div></div>
+      <div class="grid statsGrid" id="statsGrid" style="margin-top:16px"></div>
+      <div class="card" style="margin-top:16px"><h3>Subject XP</h3><div class="subjectList" id="subjectList" style="margin-top:12px"></div></div>
+    </section>
+
+    <section id="log" class="tabsPage">
+      <div class="card"><div class="row"><h2>Study Log</h2><span class="muted">Battle reports, not diaries.</span></div><div class="logFilters" id="logFilters" style="margin-top:14px"></div><div id="logList"></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="completeOverlay">
+  <div class="result" id="completionBox">
+    <h2 style="text-align:center">MISSION COMPLETE</h2>
+    <p class="muted" style="text-align:center;margin-top:6px">Claim progress after a tiny quality check.</p>
+    <div class="quality" style="margin-top:18px">
+      <label class="check"><input type="checkbox" id="qRecall"> I retrieved from memory / self-tested</label>
+      <label class="check"><input type="checkbox" id="qAnalysis"> I explained why an answer was right or wrong</label>
+      <label class="check"><input type="checkbox" id="qReplication"> I redid / reproduced without looking</label>
+      <label class="check"><input type="checkbox" id="qPassive"> This was mostly passive reading</label>
+    </div>
+    <div style="margin-top:14px"><b>Energy</b><div class="scale" data-scale="energy"></div></div>
+    <div style="margin-top:10px"><b>Difficulty</b><div class="scale" data-scale="difficulty"></div></div>
+    <div style="margin-top:10px"><b>Frustration</b><div class="scale" data-scale="frustration"></div></div>
+    <input id="noteInput" type="text" maxlength="120" placeholder="One-line note: what mattered most?" style="margin-top:14px" />
+    <div class="row" style="margin-top:16px"><button class="ghost" id="skipNoteBtn">Skip Note</button><button class="primary" id="claimBtn">Claim Progress</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="resultOverlay">
+  <div class="result">
+    <div class="stamp">MISSION CLEAR</div>
+    <div class="rewardRows" id="rewardRows"></div>
+    <div class="levelUp" id="levelUpText">LEVEL UP</div>
+    <div class="row"><span class="muted">Progress saved locally.</span><button class="ghost" id="skipResultBtn">Skip</button></div>
+  </div>
+</div>
+
+<script>
+// Growth Console: single-file, local-first study tracker.
+const STORAGE_KEY = 'studyGrowthConsole.v1';
+const STAT_META = {
+  focus:{name:'Focus',meaning:'Starting and staying with one target.'},
+  comprehension:{name:'Comprehension',meaning:'Reading and concept grasp.'},
+  precision:{name:'Precision',meaning:'Detail accuracy, qualifiers, error detection.'},
+  recall:{name:'Recall',meaning:'Active memory and retrieval strength.'},
+  output:{name:'Output',meaning:'Writing, speaking, explaining, reproducing.'},
+  recovery:{name:'Recovery',meaning:'Restarting when energy is low or momentum breaks.'}
+};
+const SUBJECTS = {
+  ieltsReading:'IELTS Reading', vocabulary:'Vocabulary', math:'Math', science:'Science', writingSpeaking:'Writing/Speaking', review:'Review'
+};
+const MISSION_TYPES = ['Timed Set','Error Review','Active Recall','Explain Back','Problem Set','Minimum Win'];
+const DURATIONS = [{label:'10 min Restart',value:10},{label:'25 min Standard',value:25},{label:'45 min Deep',value:45}];
+const PRESETS = {
+  'ieltsReading|Timed Set':{subject:'ieltsReading',xp:20,stats:{comprehension:2,precision:2}},
+  'ieltsReading|Error Review':{subject:'ieltsReading',xp:18,stats:{precision:3,comprehension:1}},
+  'vocabulary|Active Recall':{subject:'vocabulary',xp:18,stats:{recall:3,focus:1}},
+  'math|Problem Set':{subject:'math',xp:20,stats:{precision:2,focus:1,comprehension:1}},
+  'science|Timed Set':{subject:'science',xp:18,stats:{comprehension:2,recall:1}},
+  'science|Explain Back':{subject:'science',xp:18,stats:{output:2,comprehension:1,recall:1}},
+  'writingSpeaking|Explain Back':{subject:'writingSpeaking',xp:20,stats:{output:3,focus:1}},
+  'review|Active Recall':{subject:'review',xp:16,stats:{recall:2,precision:1,recovery:1}},
+  'review|Minimum Win':{subject:'review',xp:10,stats:{recovery:3,focus:1}}
+};
+const DEFAULT_STATE = () => ({version:1,createdAt:new Date().toISOString(),settings:{reduceMotion:false},stats:Object.fromEntries(Object.keys(STAT_META).map(k=>[k,{xp:0}])),subjects:Object.fromEntries(Object.keys(SUBJECTS).map(k=>[k,{xp:0}])),logs:[],currentMission:null,lastSuggestion:'review|Minimum Win'});
+let state = loadState();
+let ui = {tab:'home',subject:'ieltsReading',type:'Error Review',duration:10,paused:false,timer:null,quality:{energy:3,difficulty:3,frustration:3},logFilter:'All'};
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return DEFAULT_STATE();return {...DEFAULT_STATE(),...JSON.parse(raw)}}catch(e){return DEFAULT_STATE()}}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){console.warn('Save failed',e)}}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function xpToNextLevel(level){return 12 + Math.floor(level*3.5)}
+function levelInfo(totalXp){let level=1,rest=totalXp;while(rest>=xpToNextLevel(level)){rest-=xpToNextLevel(level);level++}return {level,into:rest,need:xpToNextLevel(level),pct:Math.min(100,Math.round(rest/xpToNextLevel(level)*100))}}
+function tier(level){if(level<=4)return'Warming Up';if(level<=9)return'Stable';if(level<=19)return'Sharp';if(level<=34)return'Advanced';if(level<=54)return'Locked In';return'Mastery'}
+function presetFor(subject,type){return PRESETS[`${subject}|${type}`] || {subject,xp:12,stats:{focus:1,comprehension:1}}}
+function fmtDuration(sec){const m=Math.floor(sec/60),s=sec%60;return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
+function todayKey(d=new Date()){return d.toISOString().slice(0,10)}
+function hours(n){return Math.round(n/60*10)/10}
+function activeDays7(){const set=new Set();const cutoff=Date.now()-6*86400000;state.logs.forEach(l=>{const t=new Date(l.timestamp).getTime();if(t>=cutoff)set.add(todayKey(new Date(t)))});return set.size}
+function lastGapHours(){const last=state.logs[0];if(!last)return 999;return (Date.now()-new Date(last.timestamp).getTime())/3600000}
+function setTab(tab){ui.tab=tab;document.querySelectorAll('.tabsPage').forEach(p=>p.classList.toggle('active',p.id===tab));renderNav();if(tab==='home')renderHome();if(tab==='mission')renderMission();if(tab==='stats')renderStats();if(tab==='log')renderLog()}
+function renderNav(){const nav=document.getElementById('nav');nav.innerHTML=['Home','Mission','Stats','Log'].map(t=>`<button class="${ui.tab===t.toLowerCase()?'active':''}" onclick="setTab('${t.toLowerCase()}')">${t}</button>`).join('')}
+function renderHome(){const last=state.logs[0];document.getElementById('homeSubtitle').textContent=last?'Ready when you are. One clean mission is enough.':'No sessions yet. Start with a 10-minute mission.';document.getElementById('quickDurations').innerHTML=DURATIONS.map(d=>`<button class="chip ${ui.duration===d.value?'active':''}" onclick="ui.duration=${d.value};setTab('mission')">${d.label}</button>`).join('');const suggestion=suggestMission();document.getElementById('suggestedText').textContent=`${SUBJECTS[suggestion.subject]} — ${suggestion.type}. ${suggestion.reason}`;document.getElementById('suggestReason').textContent=suggestion.tag;document.getElementById('statStrip').innerHTML=Object.entries(STAT_META).map(([k,m])=>{const info=levelInfo(state.stats[k].xp);return `<div class="miniStat"><b>${m.name}</b><span>Lv. ${info.level} · ${tier(info.level)}</span></div>`}).join('');document.getElementById('lastSession').innerHTML=last?`${new Date(last.timestamp).toLocaleString()} · ${SUBJECTS[last.subject]} — ${last.missionType} · ${last.durationMin} min<br><span class="muted">${last.note||'No note.'}</span>`:'No sessions yet. Start with a 10-minute mission.'}
+function suggestMission(){const last=state.logs[0];if(!last||last.state?.frustration>=4||lastGapHours()>24)return{subject:'review',type:'Minimum Win',reason:'Restart gently; momentum beats drama.',tag:'Recovery'};return{subject:'ieltsReading',type:'Error Review',reason:'Precision grows fastest when you review the exact miss.',tag:'Precision'}}
+function renderMission(){document.getElementById('subjectOptions').innerHTML=Object.entries(SUBJECTS).map(([k,v])=>`<button class="option ${ui.subject===k?'active':''}" onclick="ui.subject='${k}';renderMission()">${v}</button>`).join('');document.getElementById('typeOptions').innerHTML=MISSION_TYPES.map(t=>`<button class="option ${ui.type===t?'active':''}" onclick="ui.type='${t}';renderMission()">${t}</button>`).join('');document.getElementById('durationOptions').innerHTML=DURATIONS.map(d=>`<button class="chip ${ui.duration===d.value?'active':''}" onclick="ui.duration=${d.value};renderMission()">${d.label}</button>`).join('');const p=presetFor(ui.subject,ui.type);document.getElementById('estimatedGains').innerHTML=rewardSummary({stats:p.stats,subject:ui.subject,subjectXp:p.xp,badges:[]});restoreTimerView()}
+function restoreTimerView(){const cm=state.currentMission;if(cm&&cm.running){document.getElementById('missionSetup').classList.add('hidden');document.getElementById('timerScreen').classList.remove('hidden');document.getElementById('runningTitle').textContent=`${SUBJECTS[cm.subject]} — ${cm.type}`;tickTimer()}else{document.getElementById('missionSetup').classList.remove('hidden');document.getElementById('timerScreen').classList.add('hidden')}}
+function startMission(){const now=Date.now();state.currentMission={subject:ui.subject,type:ui.type,durationMin:ui.duration,startedAt:now,remainingSec:ui.duration*60,running:true,paused:false};saveState();restoreTimerView();if(ui.timer)clearInterval(ui.timer);ui.timer=setInterval(tickTimer,1000)}
+function tickTimer(){const cm=state.currentMission;if(!cm)return;document.getElementById('timerDisplay').textContent=fmtDuration(cm.remainingSec);if(cm.paused)return;if(cm.remainingSec<=0){clearInterval(ui.timer);showCompletion();return}cm.remainingSec--;if(cm.remainingSec%15===0)saveState()}
+function pauseTimer(){const cm=state.currentMission;if(!cm)return;cm.paused=!cm.paused;document.getElementById('pauseBtn').textContent=cm.paused?'Resume':'Pause';saveState()}
+function finishEarly(){const cm=state.currentMission;if(!cm)return;const elapsed=cm.durationMin*60-cm.remainingSec;if(elapsed<cm.durationMin*60*.8&&!confirm('Less than 80% done. Count as cancelled instead?'))return;showCompletion(elapsed<cm.durationMin*60)}
+function cancelMission(){if(confirm('Cancel this mission? No progress will be claimed.')){state.currentMission=null;saveState();clearInterval(ui.timer);restoreTimerView()}}
+function showCompletion(){clearInterval(ui.timer);document.getElementById('completeOverlay').classList.add('show')}
+function makeScales(){document.querySelectorAll('.scale').forEach(sc=>{const key=sc.dataset.scale;sc.innerHTML=[1,2,3,4,5].map(n=>`<button class="${ui.quality[key]===n?'active':''}" onclick="ui.quality.${key}=${n};makeScales()">${n}</button>`).join('')})}
+function calculateReward(cm,quality,partial=false){const base=presetFor(cm.subject,cm.type);const stats={...base.stats};let xp=base.xp;let qualityScore=0;const badges=[];if(partial){xp=Math.round(xp*.7);badges.push('Partial Clear')}if(quality.activeRecall){stats.recall=(stats.recall||0)+1;qualityScore++;xp*=1.1}if(quality.analysis){const key=cm.type==='Timed Set'||cm.type==='Error Review'?'precision':'comprehension';stats[key]=(stats[key]||0)+1;qualityScore++;xp*=1.1}if(quality.replication){const expressive=cm.type==='Explain Back'||cm.subject==='writingSpeaking';const key=expressive?'output':'precision';stats[key]=(stats[key]||0)+1;qualityScore++;xp*=1.1}if(quality.passiveOnly&&qualityScore===0){xp*=.6;badges.push('Passive Discount')}if(quality.energy<=2){stats.recovery=(stats.recovery||0)+2;badges.push('Recovery Bonus')}if(quality.difficulty>=4){stats.focus=(stats.focus||0)+1;badges.push('Hard Win')}if(lastGapHours()>=24){stats.recovery=(stats.recovery||0)+2;badges.push('Restart Bonus')}if(qualityScore>=2&&quality.difficulty>=4&&Math.random()<.12){xp+=1;badges.push('Rare Commendation')}return{stats,subject:cm.subject,subjectXp:Math.max(1,Math.round(xp)),badges}}
+function claimProgress(skipNote=false){const cm=state.currentMission;if(!cm)return;const quality={activeRecall:document.getElementById('qRecall').checked,analysis:document.getElementById('qAnalysis').checked,replication:document.getElementById('qReplication').checked,passiveOnly:document.getElementById('qPassive').checked,energy:ui.quality.energy,difficulty:ui.quality.difficulty,frustration:ui.quality.frustration};const note=skipNote?'':document.getElementById('noteInput').value.trim();const elapsedMin=cm.durationMin;const reward=calculateReward(cm,quality,false);const before=Object.fromEntries(Object.keys(STAT_META).map(k=>[k,levelInfo(state.stats[k].xp).level]));Object.entries(reward.stats).forEach(([k,v])=>state.stats[k].xp+=v);state.subjects[reward.subject].xp+=reward.subjectXp;const after=Object.fromEntries(Object.keys(STAT_META).map(k=>[k,levelInfo(state.stats[k].xp).level]));const levelUps=Object.keys(STAT_META).filter(k=>after[k]>before[k]);state.logs.unshift({id:'log_'+Date.now(),timestamp:new Date().toISOString(),subject:cm.subject,missionType:cm.type,durationMin:elapsedMin,completed:true,quality,state:ui.quality,rewards:reward,note});state.logs=state.logs.slice(0,200);state.currentMission=null;saveState();document.getElementById('completeOverlay').classList.remove('show');clearCompletion();renderAll();animateMissionResult(reward,levelUps)}
+function clearCompletion(){['qRecall','qAnalysis','qReplication','qPassive'].forEach(id=>document.getElementById(id).checked=false);document.getElementById('noteInput').value='';ui.quality={energy:3,difficulty:3,frustration:3};makeScales()}
+function rewardSummary(r){return `<div>${Object.entries(r.stats).map(([k,v])=>`<span class="badge">${STAT_META[k].name} +${v}</span>`).join('')}<span class="badge">${SUBJECTS[r.subject]} XP +${r.subjectXp}</span>${(r.badges||[]).map(b=>`<span class="badge">${b}</span>`).join('')}</div>`}
+function renderStats(){const totalM=state.logs.length,totalMin=state.logs.reduce((a,l)=>a+(l.durationMin||0),0);document.getElementById('overview').textContent=`Total missions: ${totalM} · Total focus time: ${hours(totalMin)}h · Days active in last 7: ${activeDays7()}`;document.getElementById('statsGrid').innerHTML=Object.entries(STAT_META).map(([k,m])=>{const info=levelInfo(state.stats[k].xp);return `<div class="card statCard" id="stat-${k}"><div class="row"><h3>${m.name}</h3><span class="badge">Lv. ${info.level}</span></div><p class="muted">Tier: ${tier(info.level)}</p><div class="bar"><div class="fill" style="width:${info.pct}%"></div></div><p class="muted">${info.into} / ${info.need} XP to next level</p><p class="muted" style="margin-top:8px">${m.meaning}</p></div>`}).join('');document.getElementById('subjectList').innerHTML=Object.entries(SUBJECTS).map(([k,v])=>{const xp=state.subjects[k].xp;const max=Math.max(100,...Object.values(state.subjects).map(s=>s.xp));return `<div class="subjectItem"><b>${v}</b><div class="bar"><div class="fill" style="width:${Math.round(xp/max*100)}%"></div></div><span class="muted">${xp} XP</span></div>`}).join('')}
+function renderLog(){const filters=['All','Today','IELTS','Math','Science','Review'];document.getElementById('logFilters').innerHTML=filters.map(f=>`<button class="chip ${ui.logFilter===f?'active':''}" onclick="ui.logFilter='${f}';renderLog()">${f}</button>`).join('');let logs=[...state.logs];if(ui.logFilter==='Today')logs=logs.filter(l=>todayKey(new Date(l.timestamp))===todayKey());if(ui.logFilter==='IELTS')logs=logs.filter(l=>l.subject==='ieltsReading');if(ui.logFilter==='Math')logs=logs.filter(l=>l.subject==='math');if(ui.logFilter==='Science')logs=logs.filter(l=>l.subject==='science');if(ui.logFilter==='Review')logs=logs.filter(l=>l.subject==='review');document.getElementById('logList').innerHTML=logs.length?logs.map(l=>`<div class="card logEntry"><div class="row"><b>${new Date(l.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})} · ${SUBJECTS[l.subject]} — ${l.missionType}</b><span class="muted">${l.durationMin} min</span></div><p class="muted" style="margin-top:8px">State: Energy ${l.state.energy} · Difficulty ${l.state.difficulty} · Frustration ${l.state.frustration}</p><div style="margin-top:8px">${rewardSummary(l.rewards)}</div><p class="muted" style="margin-top:8px">${l.note||'No note.'}</p></div>`).join(''):'<p class="muted">No matching logs yet.</p>'}
+function animateMissionResult(reward,levelUps){const overlay=document.getElementById('resultOverlay'),rows=document.getElementById('rewardRows'),level=document.getElementById('levelUpText');rows.innerHTML=Object.entries(reward.stats).map(([k,v])=>`<div class="rewardRow"><span>${STAT_META[k].name}</span><b>+${v}</b></div>`).join('')+`<div class="rewardRow"><span>${SUBJECTS[reward.subject]} XP</span><b>+${reward.subjectXp}</b></div>`+(reward.badges||[]).map(b=>`<div class="rewardRow"><span>Badge</span><b>${b}</b></div>`).join('');level.classList.toggle('show',levelUps.length>0);level.textContent=levelUps.length?'LEVEL UP · '+levelUps.map(k=>STAT_META[k].name).join(', '):'LEVEL UP';overlay.classList.add('show');[...rows.children].forEach((r,i)=>setTimeout(()=>r.classList.add('show'),180+i*120));setTimeout(()=>{levelUps.forEach(k=>{const el=document.getElementById('stat-'+k);if(el){el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1200)}})},500);setTimeout(()=>overlay.classList.remove('show'),2500)}
+function renderAll(){renderNav();renderHome();renderMission();renderStats();renderLog()}
+document.getElementById('startMissionBtn').onclick=()=>setTab('mission');document.getElementById('beginBtn').onclick=startMission;document.getElementById('pauseBtn').onclick=pauseTimer;document.getElementById('finishBtn').onclick=finishEarly;document.getElementById('cancelBtn').onclick=cancelMission;document.getElementById('claimBtn').onclick=()=>claimProgress(false);document.getElementById('skipNoteBtn').onclick=()=>claimProgress(true);document.getElementById('skipResultBtn').onclick=()=>document.getElementById('resultOverlay').classList.remove('show');document.getElementById('resetBtn').onclick=()=>{if(confirm('Reset all local progress?')){state=DEFAULT_STATE();saveState();renderAll()}};window.addEventListener('beforeunload',saveState);makeScales();renderAll();
+</script>
+</body>
+</html>
