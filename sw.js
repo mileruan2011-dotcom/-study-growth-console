@@ -1,4 +1,6 @@
-const CACHE_NAME = 'growth-console-pwa-v2';
+const APP_VERSION = '0.4.2';
+const APP_BUILD = '2026-07-06-timer';
+const CACHE_NAME = `growth-console-pwa-${APP_VERSION}-${APP_BUILD}`;
 const ASSETS = [
   './',
   './index.html',
@@ -7,11 +9,18 @@ const ASSETS = [
 ];
 const ASSET_URLS = new Set(ASSETS.map(asset => new URL(asset, self.location).href));
 
+function isSameOriginAppShell(request) {
+  if (request.method !== 'GET') return false;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return false;
+  return ASSET_URLS.has(url.href);
+}
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(ASSETS))
-      .then(() => self.skipWaiting())
+      .catch(error => console.warn('App shell cache install failed', error))
   );
 });
 
@@ -21,6 +30,10 @@ self.addEventListener('activate', event => {
       .then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
       .then(() => self.clients.claim())
   );
+});
+
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', event => {
@@ -41,7 +54,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if (!ASSET_URLS.has(url.href)) return;
+  if (!isSameOriginAppShell(event.request)) return;
   event.respondWith(
     fetch(event.request)
       .then(response => {
