@@ -1,5 +1,5 @@
-const APP_VERSION = '0.4.2';
-const APP_BUILD = '2026-07-06-timer';
+const APP_VERSION = '0.5.0';
+const APP_BUILD = '2026-07-07-learning-run';
 const CACHE_NAME = `growth-console-pwa-${APP_VERSION}-${APP_BUILD}`;
 const ASSETS = [
   './',
