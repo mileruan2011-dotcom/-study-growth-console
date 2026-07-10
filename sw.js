@@ -1,5 +1,5 @@
-const APP_VERSION = '0.5.0';
-const APP_BUILD = '2026-07-07-launch-dashboard-trends';
+const APP_VERSION = '0.6.0';
+const APP_BUILD = '2026-07-10-premium-web-audio';
 const CACHE_NAME = `growth-console-pwa-${APP_VERSION}-${APP_BUILD}`;
 const ASSETS = [
   './',
